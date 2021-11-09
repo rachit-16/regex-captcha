@@ -1,0 +1,80 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <link rel='stylesheet' type='text/css' href='/css/index.css' />
+    <script defer src='/scripts/js/fontawesome.min.js'></script>
+    <script defer src='/scripts/js/brands.min.js'></script>
+    <script defer src='/scripts/js/solid.min.js'></script>
+
+    <title>Login / Signup</title>
+  </head>
+  <body>
+    <div class='formPage'>
+      <div class='container' id='container'>
+        <div class='form-container sign-up-container'>
+          <form id='signup_form'>
+            <h1>Create Account</h1>
+            <div class='social-container'>
+              <a href='#' class='social'><i class='fab fa-facebook-f'></i></a>
+              <a href='#' class='social'><i class='fab fa-google'></i></a>
+              <a href='#' class='social'><i class='fab fa-linkedin-in'></i></a>
+            </div>
+            <span>or use your email for registration</span>
+            <div class='username'>
+              <i class='fas fa-user'></i>
+              <input type='text' name='name' placeholder='Name' required />
+            </div>
+            <div class='email'>
+              <i class='fas fa-envelope'></i>
+              <input type='email' name='email' placeholder='Email' required />
+            </div>
+            <div class='password'>
+              <i class='fas fa-key'></i>
+              <input type='password' name='password' placeholder='Password' required />
+            </div>
+            <button id='signup_btn'>Sign Up</button>
+          </form>
+        </div>
+        <div class='form-container sign-in-container'>
+          <form id='login_form'>
+            <h1>Sign in</h1>
+            <div class='social-container'>
+              <a href='#' class='social'><i class='fab fa-google'></i></a>
+              <a href='#' class='social'><i class='fab fa-linkedin-in'></i></a>
+              <a href='#' class='social'><i class='fab fa-facebook-f'></i></a>
+            </div>
+            <span>or use your account</span>
+            <div class='email'>
+              <div><i class='fas fa-envelope'></i></div>
+              <input type='email' name='email' placeholder='Email' required />
+            </div>
+            <div class='password'>
+              <i class='fas fa-key'></i>
+              <input type='password' name='password' placeholder='Password' required />
+            </div>
+            <a href='#'>Forgot your password?</a>
+            <button id='login_btn'>Sign In</button>
+          </form>
+        </div>
+        <div class='overlay-container'>
+          <div class='overlay'>
+            <div class='overlay-panel overlay-left'>
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class='ghost' id='login-overlay-btn'>Sign In</button>
+            </div>
+            <div class='overlay-panel overlay-right'>
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start journey with us</p>
+              <button class='ghost' id='signup-overlay-btn'>Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='/scripts/index.js'></script>
+  </body>
+</html>
