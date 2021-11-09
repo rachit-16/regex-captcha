@@ -1,0 +1,137 @@
+.regex-gen__container {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.regex-gen__inner {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.card {
+  border: 1px solid #888;
+  border-radius: 4px;
+  margin: 10px auto;
+  box-shadow: 1px 1px 2px #ddd;
+  width: 80%;
+}
+
+.card-header {
+  border-bottom: 1px solid #888;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 15px;
+  font-size: 1.2em;
+  background-color: #eee;
+}
+
+.card-body {
+  /* border: 1px solid black; */
+  padding: 20px;
+}
+
+.input-wrapper {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-wrapper input {
+  width: 90%;
+  height: 100%;
+  border: 1px solid rgb(118, 118, 118);
+  border-right: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.input-wrapper button {
+  width: 10%;
+  height: 100%;
+  border: 1px solid rgb(118, 118, 118);
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #f9f9f9;
+  font-size: 1.1em;
+}
+
+.add-btn {
+  background-color: rgb(40, 167, 69);
+}
+
+.reset-btn {
+  background-color: rgb(220, 53, 69);
+}
+
+.add-btn:hover {
+  cursor: pointer;
+  background-color: rgb(29, 145, 56);
+}
+
+.reset-btn:hover {
+  cursor: pointer;
+  background-color: rgb(180, 34, 49);
+}
+
+input[readonly] {
+  background-color: #bdbdcf;
+}
+
+ul.strings {
+  padding: 0;
+}
+
+ul.strings li {
+  list-style: none;
+  border: 1px solid rgb(197, 192, 192);
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ul.strings li:only-child {
+  border-radius: 4px !important;
+} */
+
+ul.strings li:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+ul.strings li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+ul.strings li:only-child {
+  border-radius: 4px;
+}
+
+.remove-btn {
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(235, 37, 57);
+  color: #eee;
+  padding: 4px 8px;
+}
+
+.remove-btn:hover {
+  cursor: pointer;
+  background-color: rgb(207, 39, 55);
+}
+
+.hide {
+  display: none;
+}

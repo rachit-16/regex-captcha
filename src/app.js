@@ -1,6 +1,7 @@
 const express = require('express')
 const hbs = require('hbs')
 const path = require('path')
+const regexgen = require('regexgen')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -34,6 +35,12 @@ app.get('/', (req, res) => {
 app.post('/login', (req, res) => {
   console.log('->', req.body)
   res.json({ username: Object.keys(req.body)[0] })
+})
+
+app.post('/update-regex', (req, res) => {
+  const strings = req.body.strings
+  const newRegex = regexgen(strings).toString()
+  res.json(newRegex)
 })
 
 app.get('/generate-regex', (req, res) => {
