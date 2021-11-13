@@ -1,0 +1,47 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    {{#if isRegexPage}}   
+      <link rel='stylesheet' href='/css/generate-regex.css' />
+      <link rel='stylesheet' href='/css/regex-generator.css' />
+    {{/if}}
+        
+    {{#if isCaptchaPage}}
+      <link rel='stylesheet' href='/css/generate-captcha.css' />
+      <link rel='stylesheet' href='/css/captcha-generator.css' />
+    {{/if}}
+
+    <link rel='stylesheet' href='/css/navbar.css' />
+    <link rel='stylesheet' href='/css/home.css' />
+    <script defer src='/scripts/js/fontawesome.min.js'></script>
+    <script defer src='/scripts/js/solid.min.js'></script>
+    <title>
+        {{#if isRegexPage}}
+            Generate Regex
+        {{/if}}
+        
+        {{#if isCaptchaPage}}
+            Generate Captcha
+        {{/if}}
+    </title>
+  </head>
+
+  <body>
+    <div class="home">
+        {{#if isRegexPage}}
+            {{>generate_regex}}
+            <script src='/scripts/generate-regex.js'></script>
+        {{/if}}
+
+        {{#if isCaptchaPage}}
+            {{>generate_captcha regex=regex text=captchaText image=captchaImage }}
+            <script src='/scripts/generate-captcha.js'></script>
+        {{/if}}
+    </div>
+
+    <script src='/scripts/navbar.js'></script>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+.captcha-gen__container {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+}
+
+.captcha-gen__inner {
+  width: 70%;
+  height: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.card {
+  border: 1px solid #888;
+  border-radius: 4px;
+  margin: 20px auto;
+  box-shadow: 1px 1px 2px #ddd;
+  width: 80%;
+}
+
+.card-header {
+  border-bottom: 1px solid #888;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 14px 15px;
+  font-size: 1.3rem;
+  background-color: #eee;
+}
+
+.card-body {
+  /* border: 1px solid black; */
+  padding: 24px;
+}
+
+#card-1 {
+  height: 33%;
+}
+
+#card-1 .card-header {
+  height: 25%;
+}
+
+#card-1 .card-body {
+  height: 75%;
+}
+
+.input-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#form-input form {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#form-input .input-wrapper label {
+  width: 20%;
+  font-size: 1.1rem;
+  vertical-align: middle;
+}
+
+.input-wrapper input {
+  width: 85%;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 4px;
+  font-size: 1.05rem;
+  padding: 8px;
+}
+
+.input-1,
+.input-2,
+.input-3 {
+  width: 100%;
+  height: 28px;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-between; */
+}
+
+.generate-btn {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 4px;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 5px;
+  color: #f9f9f9;
+  font-size: 1.1em;
+  background-color: rgb(40, 167, 69);
+}
+
+.generate-btn:hover {
+  cursor: pointer;
+  background-color: rgb(29, 145, 56);
+}
+
+.generate-btn svg {
+  margin-left: 10px;
+}
+
+#card-2 {
+  height: 50%;
+  z-index: 5;
+}
+
+#card-2 .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fa-file-download {
+  color: rgb(129, 152, 161);
+}
+
+.fa-file-download:hover {
+  cursor: pointer;
+  color: rgb(82, 115, 129);
+}
+
+#card-2 .card-body {
+  height: 75%;
+  overflow-x: auto;
+  overflow-y: scroll;
+  z-index: 10;
+  padding: 0;
+  position: relative;
+}
+
+ul.strings {
+  padding: 20px;
+  margin: 0;
+  height: 100%;
+  max-height: 100%;
+  z-index: 15;
+  position: relative;
+}
+
+ul.strings li {
+  list-style: none;
+  border: 1px solid rgb(197, 192, 192);
+  width: 100%;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  z-index: 20;
+  position: relative;
+}
+
+ul.strings li:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+ul.strings li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+ul.strings li:only-child {
+  border-radius: 4px;
+}
+
+.download {
+  position: relative;
+}
+
+.download::before,
+.download::after {
+  --scale: 0;
+  --tooltip-color: rgba(0, 0, 0, 0.623);
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateX(var(--translate-X, 0)) translateY(-50%) scale(var(--scale));
+  transition: 70ms transform;
+  z-index: 100;
+}
+
+.download::before {
+  content: attr(data-tooltip);
+  color: rgb(255, 166, 0);
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  min-width: 150px;
+  max-width: 250px;
+  height: 35px;
+  background-color: var(--tooltip-color);
+  transform-origin: left center;
+}
+
+.download::after {
+  --translate-X: -100%;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-right-color: var(--tooltip-color);
+  transform-origin: right center;
+}
+
+.download:hover::before,
+.download:hover::after {
+  --scale: 1;
+  z-index: 200;
+}
+
+/*
+
+
+.remove-btn {
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(235, 37, 57);
+  color: #eee;
+  padding: 4px 8px;
+}
+
+.remove-btn:hover {
+  cursor: pointer;
+  background-color: rgb(207, 39, 55);
+}
+
+.hide {
+  display: none;
+}
+*/

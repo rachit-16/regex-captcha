@@ -1,18 +1,7 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
-}
-
 .navbar {
   background-color: rgb(167, 99, 231);
   width: 100%;
-  height: 50px;
+  height: 50px !important;
   padding: 0 30px;
   display: flex;
   align-items: center;
@@ -50,16 +39,18 @@ body {
   margin: 0;
   padding: 5px 12px;
   list-style: none;
-  width: 150px;
+  width: 165px;
   height: 100%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.1rem;
 }
 
 .navbar li:hover,
-.navbar li:active {
+.navbar li:active,
+.active {
   background-color: rgb(143, 78, 204);
   font-weight: bold;
   border-bottom: 3px solid rgb(245, 175, 46);
