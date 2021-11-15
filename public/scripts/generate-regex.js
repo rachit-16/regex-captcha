@@ -1,6 +1,7 @@
 const alertDialog = document.getElementById('alert')
 const stringInput = document.querySelector('input[name=string-input')
 const regexOutput = document.querySelector('input[name=output')
+const count = document.querySelector('span#count')
 const regexTransferIcon = document.getElementById('regex-transfer')
 const addButton = document.querySelector('button.add-btn')
 const resetButton = document.querySelector('button.reset-btn')
@@ -8,6 +9,37 @@ const removeButton = document.querySelector('button.remove-btn')
 const list = document.querySelector('ul.strings')
 const regexDiv = document.getElementById('regex-output')
 const listDiv = document.getElementById('strings-list')
+
+let storedRegex = localStorage.getItem('regex')
+let storedStrings = localStorage.getItem('strings')
+
+const createNewItem = (input) => {
+  let li = document.createElement('li')
+  let text = document.createTextNode(input)
+  let button = document.createElement('button')
+  button.classList.add('remove-btn')
+  button.setAttribute('onclick', 'removeString(event)')
+  button.innerText = '✖ Remove'
+  li.appendChild(text)
+  li.appendChild(button)
+  // li.setAttribute('id', `li-${strings.length + 1}`)
+
+  return li
+}
+
+if (storedRegex) {
+  regexDiv.classList.remove('hide')
+  listDiv.classList.remove('hide')
+
+  regexOutput.value = storedRegex
+  storedStrings = JSON.parse(storedStrings)
+  count.innerText = `[${storedStrings.length}]`
+
+  storedStrings.forEach((str) => {
+    const newItem = createNewItem(str)
+    list.appendChild(newItem)
+  })
+}
 
 const updateRegex = (strings) => {
   if (strings.length === 0) {
@@ -35,6 +67,7 @@ const reset = (resetAll) => {
   if (resetAll) {
     regexOutput.value = ''
     list.innerHTML = ''
+    count.innerText = '[0]'
     regexDiv.classList.add('hide')
     listDiv.classList.add('hide')
     localStorage.removeItem('regex')
@@ -61,20 +94,6 @@ const checkDuplicate = (input) => {
   return false
 }
 
-const createNewItem = (input) => {
-  let li = document.createElement('li')
-  let text = document.createTextNode(input)
-  let button = document.createElement('button')
-  button.classList.add('remove-btn')
-  button.setAttribute('onclick', 'removeString(event)')
-  button.innerText = '✖ Remove'
-  li.appendChild(text)
-  li.appendChild(button)
-  // li.setAttribute('id', `li-${strings.length + 1}`)
-
-  return li
-}
-
 const addString = () => {
   const input = stringInput.value
   let stringList = localStorage.getItem('strings')
@@ -94,6 +113,7 @@ const addString = () => {
     const newItem = createNewItem(input)
     list.appendChild(newItem)
     stringList.push(input)
+    count.innerText = `[${stringList.length}]`
     localStorage.setItem('strings', JSON.stringify(stringList))
     updateRegex(stringList)
     reset(false)
@@ -118,7 +138,7 @@ const removeString = (event) => {
   } else {
     localStorage.setItem('strings', JSON.stringify(updatedStrings))
   }
-
+  count.innerText = `[${updatedStrings.length}]`
   updateRegex(updatedStrings)
 }
 
@@ -140,7 +160,8 @@ stringInput.addEventListener('keyup', (event) => {
 })
 
 regexTransferIcon.addEventListener('click', () => {
-  const regex = regexOutput.value
-  localStorage.setItem('regex', regex)
+  localStorage.setItem('captchaRegex', regexOutput.value)
+  localStorage.removeItem('captchaLimit')
+  localStorage.removeItem('captchaData')
   window.location = '/generate-captcha'
 })

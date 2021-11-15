@@ -85,10 +85,15 @@
   /* justify-content: space-between; */
 }
 
+.input-3 {
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .generate-btn {
-  width: 80%;
+  width: 85%;
   height: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 4px;
   border: 1px solid rgb(118, 118, 118);
   border-radius: 5px;
@@ -106,6 +111,20 @@
   margin-left: 10px;
 }
 
+#reset-btn {
+  height: 100%;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 5px;
+  color: #f9f9f9;
+  font-size: 1.1em;
+  background-color: rgb(220, 53, 69);
+}
+
+#reset-btn:hover {
+  cursor: pointer;
+  background-color: rgb(180, 34, 49);
+}
+
 #card-2 {
   height: 50%;
 }
@@ -114,6 +133,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#card-2 #count {
+  margin-left: 12px;
+  color: rgb(105, 131, 165);
 }
 
 .fa-file-download {
@@ -274,8 +298,8 @@ span#tooltip {
   /*the span will display just on :hover state*/
   display: block;
   position: absolute;
-  top: 50%;
-  left: 100px;
+  top: 10em;
+  left: 10em;
   transform: translateY(-50%);
   border: 1px solid #6e7044;
   background-color: #feffe1;

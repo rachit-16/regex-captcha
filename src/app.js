@@ -68,7 +68,7 @@ app.get('/captcha/:width?/:height?/', (req, res) => {
   const height = parseInt(req.params.height) || 190
   let { regex, limit } = req.query
 
-  const strings = getStrings(regex, limit, 2000)
+  const strings = getStrings(regex, +limit, Math.min(10 * limit, 2000))
   console.log('strings::', strings)
   limit = strings.length
 

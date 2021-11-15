@@ -1,15 +1,16 @@
 const regexInput = document.querySelector('input[name=regex-input]')
 const limitInput = document.querySelector('input[name=limit-input]')
+const count = document.querySelector('span#count')
 const generateBtn = document.querySelector('button.generate-btn')
+const resetBtn = document.querySelector('button#reset-btn')
 const list = document.querySelector('ul.captchas')
 const downloadAll = document.querySelector('div.download')
 
-const regex = localStorage.getItem('regex')
-if (regex) {
-  regexInput.value = regex
-}
+let regex = localStorage.getItem('captchaRegex')
+let limit = +localStorage.getItem('captchaLimit')
+let captchaData = localStorage.getItem('captchaData')
 
-const createNewItem = (image, text) => {
+const createNewItem = (text, image) => {
   let li = document.createElement('li')
   let textSpan = document.createElement('span')
   let iconSpan = document.createElement('span')
@@ -40,33 +41,62 @@ const createNewItem = (image, text) => {
   return li
 }
 
+if (regex) {
+  regexInput.value = regex
+}
+
+if (limit) {
+  limitInput.value = limit
+}
+
+if (captchaData) {
+  captchaData = JSON.parse(captchaData)
+  captchaData.forEach(({ text, image }) => {
+    const newItem = createNewItem(text, image)
+    list.appendChild(newItem)
+  })
+
+  count.innerText = `[${captchaData.length}]`
+}
+
 const generate = (event) => {
   event.preventDefault()
+  regex = regexInput.value
+  limit = +limitInput.value
 
   if (!regex) {
     window.alert('Please enter Regex to continue!')
     return
   }
 
-  if (!limitInput.value) {
+  if (!limit) {
     window.alert('Please enter Limit to continue!')
     return
   }
 
-  fetch(`/captcha?regex=${regex}&limit=${+limitInput.value}`)
+  if (limit === 0) {
+    window.alert('Enter a limit greater than 0!')
+    return
+  }
+
+  localStorage.setItem('captchaRegex', regex)
+  localStorage.setItem('captchaLimit', limit)
+
+  fetch(`/captcha?regex=${regex}&limit=${limit}`)
     .then((data) => data.json())
     .then((data) => {
-      localStorage.setItem('captchaData', JSON.stringify(data))
-      const htmlList = []
       if (list.children.length > 0) {
         list.innerHTML = ''
+        count.innerText = '[0]'
       }
 
-      data.map(({ image, text }) => {
-        let newItem = createNewItem(image, text)
-        htmlList.push(newItem)
+      data.map(({ text, image }) => {
+        let newItem = createNewItem(text, image)
         list.appendChild(newItem)
       })
+
+      count.innerText = `[${data.length}]`
+      localStorage.setItem('captchaData', JSON.stringify(data))
     })
     .catch((error) => {
       console.error('Error::', error)
@@ -130,10 +160,30 @@ const hideTooltip = () => {
   tooltipSpan.remove()
 }
 
+const resetAll = () => {
+  regexInput.value = ''
+  limitInput.value = ''
+  list.innerHTML = ''
+  count.innerText = '[0]'
+  localStorage.removeItem('captchaRegex')
+  localStorage.removeItem('captchaLimit')
+  localStorage.removeItem('captchaData')
+}
+
 generateBtn.addEventListener('click', (event) => generate(event))
+
+resetBtn.addEventListener('click', (event) => {
+  if (window.confirm('Are you sure to reset everything?')) {
+    resetAll()
+  }
+})
 
 downloadAll.addEventListener('click', () => {
   const captchaData = JSON.parse(localStorage.getItem('captchaData'))
+  if (!captchaData) {
+    window.alert('Please generate some captchas to download them!')
+    return
+  }
   const captchaDataObj = {}
   captchaData.map((data, idx) => {
     captchaDataObj[`captcha-${idx + 1}`] = { ...data }

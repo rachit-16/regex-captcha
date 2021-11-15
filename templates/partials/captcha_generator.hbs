@@ -5,7 +5,7 @@
       <div class='card-header'>Enter Regex</div>
       <div id='form-input' class='card-body'>
         <div class='input-wrapper'>
-          <form>
+          <form novalidate>
             <div class='input-1'>
               <label>Regex</label>
               <input type='text' name='regex-input' placeholder='Regular expression' required />
@@ -22,6 +22,7 @@
             </div>
             <div class='input-3'>
               <button class='generate-btn'>GENERATE<i class='fas fa-arrow-right'></i></button>
+              <button id='reset-btn'><i class='fas fa-redo-alt'></i></button>
             </div>
           </form>
         </div>
@@ -30,7 +31,10 @@
 
     <div id='card-2' class='card hide'>
       <div class='card-header'>
-        <div>Generated Strings and Captchas</div>
+        <div>
+          Generated Strings and Captchas
+          <span id='count'>[0]</span>
+        </div>
         <div class='download' data-tooltip='Download JSON file for ALL captchas?'>
           <i class='fas fa-file-download'></i>
         </div>

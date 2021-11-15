@@ -14,6 +14,27 @@ signInOverlayButton.addEventListener('click', () => {
   container.classList.remove('right-panel-active')
 })
 
+const loginUser = (userData) => {
+  fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then((response) => {
+      console.log('response::', response)
+      return response.json()
+    })
+    .then((data) => {
+      console.log('Success::', data)
+      window.location = '/generate-regex'
+    })
+    .catch((error) => {
+      console.error('Error:', error)
+    })
+}
+
 loginButton.addEventListener('click', (event) => {
   event.preventDefault()
   const username = 'tester'
@@ -22,6 +43,16 @@ loginButton.addEventListener('click', (event) => {
 
   const email = emailElement.value
   const password = passwordElement.value
+
+  if (!email) {
+    window.alert('Please enter your email address!')
+    return
+  }
+
+  if (!password) {
+    window.alert('Please enter your password!')
+    return
+  }
 
   const userData = {
     username: username,
@@ -82,24 +113,3 @@ signupButton.addEventListener('click', (event) => {
 
   loginUser(userData)
 })
-
-const loginUser = (userData) => {
-  fetch('/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  })
-    .then((response) => {
-      console.log('response::', response)
-      return response.json()
-    })
-    .then((data) => {
-      console.log('Success::', data)
-      window.location = '/generate-regex'
-    })
-    .catch((error) => {
-      console.error('Error:', error)
-    })
-}
