@@ -9,14 +9,9 @@ const list = document.querySelector('ul.strings')
 const regexDiv = document.getElementById('regex-output')
 const listDiv = document.getElementById('strings-list')
 
-let input = ''
-let strings = []
-let regex = ''
-console.log(localStorage.getItem('regex'))
 const updateRegex = (strings) => {
   if (strings.length === 0) {
-    regex = 'null'
-    regexOutput.value = 'null'
+    reset(true)
     return
   }
 
@@ -27,68 +22,80 @@ const updateRegex = (strings) => {
     },
     body: JSON.stringify({ strings: [...strings] }),
   })
-    .then((res) => {
-      console.log(res)
-      return res.json()
-    })
+    .then((res) => res.json())
     .then((updatedRegex) => {
-      regex = updatedRegex
       regexOutput.value = updatedRegex
+      localStorage.setItem('regex', updatedRegex)
     })
 }
 
 const reset = (resetAll) => {
-  input = ''
   stringInput.value = ''
 
   if (resetAll) {
+    regexOutput.value = ''
     list.innerHTML = ''
-    strings = []
-    stringsMap = {}
     regexDiv.classList.add('hide')
     listDiv.classList.add('hide')
-    updateRegex(strings)
+    localStorage.removeItem('regex')
+    localStorage.removeItem('strings')
   }
 }
 
-const addString = () => {
-  input = stringInput.value
+const checkDuplicate = (input) => {
+  let stringList = localStorage.getItem('strings')
 
-  if (strings.length === 0) {
+  if (!stringList) {
+    return false
+  } else {
+    stringList = JSON.parse(stringList)
+  }
+
+  let duplicate = stringList.includes(input)
+
+  if (duplicate) {
+    window.alert('String already in added string list')
+    return true
+  }
+
+  return false
+}
+
+const createNewItem = (input) => {
+  let li = document.createElement('li')
+  let text = document.createTextNode(input)
+  let button = document.createElement('button')
+  button.classList.add('remove-btn')
+  button.setAttribute('onclick', 'removeString(event)')
+  button.innerText = '✖ Remove'
+  li.appendChild(text)
+  li.appendChild(button)
+  // li.setAttribute('id', `li-${strings.length + 1}`)
+
+  return li
+}
+
+const addString = () => {
+  const input = stringInput.value
+  let stringList = localStorage.getItem('strings')
+
+  if (!stringList) {
+    stringList = []
+  } else {
+    stringList = JSON.parse(stringList)
+  }
+
+  if (!stringList || stringList.length === 0) {
     regexDiv.classList.remove('hide')
     listDiv.classList.remove('hide')
   }
 
-  const checkDuplicate = () => {
-    let duplicate = strings.includes(input)
-
-    if (duplicate) {
-      window.alert('String already in added string list')
-      return true
-    }
-
-    return false
-  }
-
-  const createNewItem = (input) => {
-    let li = document.createElement('li')
-    let text = document.createTextNode(input)
-    let button = document.createElement('button')
-    button.classList.add('remove-btn')
-    button.setAttribute('onclick', 'removeString(event)')
-    button.innerText = '✖ Remove'
-    li.appendChild(text)
-    li.appendChild(button)
-    li.setAttribute('id', `li-${strings.length + 1}`)
-
-    return li
-  }
-
-  if (input && !checkDuplicate()) {
+  if (input && !checkDuplicate(input)) {
     const newItem = createNewItem(input)
     list.appendChild(newItem)
-    strings.push(input)
-    updateRegex(strings)
+    stringList.push(input)
+    localStorage.setItem('strings', JSON.stringify(stringList))
+    updateRegex(stringList)
     reset(false)
   }
 }
@@ -102,15 +109,17 @@ const removeString = (event) => {
 
   list.removeChild(li)
 
-  strings = strings.filter((str) => str !== text)
+  let stringList = JSON.parse(localStorage.getItem('strings'))
+  let updatedStrings = stringList.filter((str) => str !== text)
   //   console.log(strings)
-
-  if (strings.length === 0) {
+  if (updatedStrings.length === 0) {
     regexDiv.classList.add('hide')
     listDiv.classList.add('hide')
+  } else {
+    localStorage.setItem('strings', JSON.stringify(updatedStrings))
   }
 
-  updateRegex(strings)
+  updateRegex(updatedStrings)
 }
 
 addButton.addEventListener('click', (event) => {

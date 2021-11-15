@@ -40,8 +40,8 @@
           {{!-- <li>
             <span class="text">{{text}}</span>
             <img class='generated-captcha' src={{image}} height='90px' width='260px' />
-            <span class='download' onclick="getDataOne()" data-tooltip='Download JSON file for ALL captchas?'>
-              <i class='fas fa-file-download'></i>
+            <span id='tooltip-container' onclick="getDataOne()" data-tooltip='Download JSON file for THIS captcha?'>
+              <i class='fas fa-file-download' onmouseenter="showTooltip(event)" onmouseleave="hideTooltip(event)"></i>
             </span>
           </li> --}}
         </ul>

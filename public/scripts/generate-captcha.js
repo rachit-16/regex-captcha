@@ -3,7 +3,6 @@ const limitInput = document.querySelector('input[name=limit-input]')
 const generateBtn = document.querySelector('button.generate-btn')
 const list = document.querySelector('ul.captchas')
 const downloadAll = document.querySelector('div.download')
-let downloadOne
 
 const regex = localStorage.getItem('regex')
 if (regex) {
@@ -25,9 +24,11 @@ const createNewItem = (image, text) => {
   img.setAttribute('width', '260px')
   img.setAttribute('height', '90px')
 
-  iconSpan.classList.add('download')
+  // iconSpan.classList.add('download')
+  iconSpan.setAttribute('id', 'tooltip-container')
   iconSpan.setAttribute('onclick', 'getDataOne(event)')
-  iconSpan.setAttribute('data-tooltip', 'Download JSON file for THIS captcha?')
+  iconSpan.setAttribute('onmouseenter', 'showTooltip(event)')
+  // iconSpan.setAttribute('data-tooltip', 'Download JSON file for THIS captcha?')
 
   i.classList.add('fas', 'fa-file-download')
 
@@ -112,6 +113,21 @@ const getDataOne = (event) => {
 
   const data = { text: text, image: imgURL }
   downloadJSON(data, { all: false })
+}
+
+const showTooltip = (event) => {
+  const target = event.target
+  console.log(target.style)
+  const tooltipSpan = document.createElement('span')
+  const tooltipText = document.createTextNode('Download JSON file for THIS captcha?')
+  tooltipSpan.setAttribute('id', 'tooltip')
+  tooltipSpan.appendChild(tooltipText)
+  target.appendChild(tooltipSpan)
+}
+
+const hideTooltip = () => {
+  const tooltipSpan = document.querySelector('span#tooltip')
+  tooltipSpan.remove()
 }
 
 generateBtn.addEventListener('click', (event) => generate(event))

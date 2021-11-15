@@ -108,7 +108,6 @@
 
 #card-2 {
   height: 50%;
-  z-index: 5;
 }
 
 #card-2 .card-header {
@@ -128,11 +127,8 @@
 
 #card-2 .card-body {
   height: 75%;
-  overflow-x: auto;
-  overflow-y: scroll;
-  z-index: 10;
+  overflow-y: auto;
   padding: 0;
-  position: relative;
 }
 
 ul.captchas {
@@ -140,8 +136,6 @@ ul.captchas {
   margin: 0;
   height: 100%;
   max-height: 100%;
-  z-index: 15;
-  position: relative;
 }
 
 ul.captchas li {
@@ -153,8 +147,6 @@ ul.captchas li {
   align-items: center;
   justify-content: space-between;
   font-size: 1.2rem;
-  z-index: 20;
-  position: relative;
 }
 
 ul.captchas li:first-child {
@@ -179,6 +171,7 @@ ul.captchas li:only-child {
 
 .download {
   position: relative;
+  z-index: 9999;
 }
 
 .download::before,
@@ -189,8 +182,7 @@ ul.captchas li:only-child {
   top: 50%;
   left: 50px;
   transform: translateX(var(--translate-X, 0)) translateY(-50%) scale(var(--scale));
-  transition: 70ms transform;
-  z-index: 100;
+  transition: 70ms transform ease;
 }
 
 .download::before {
@@ -221,6 +213,74 @@ ul.captchas li:only-child {
 .download:hover::after {
   --scale: 1;
   z-index: 200;
+}
+
+/* span#tootltip::before,
+span#tootltip::after {
+  --scale: 0;
+  --tooltip-color: rgba(0, 0, 0, 0.623);
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateX(var(--translate-X, 0)) translateY(-50%) scale(var(--scale));
+  transition: 70ms transform ease;
+}
+
+span#tootltip::before {
+  content: attr(data-tooltip);
+  color: rgb(255, 166, 0);
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  padding: 8px;
+  min-width: 150px;
+  max-width: 250px;
+  height: 35px;
+  background-color: var(--tooltip-color);
+  transform-origin: left center;
+}
+
+span#tootltip::after {
+  --translate-X: -100%;
+  content: '';
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-right-color: var(--tooltip-color);
+  transform-origin: right center;
+}
+
+span#tootltip:hover::before,
+span#tootltip:hover::after {
+  --scale: 1;
+  z-index: 200;
+} */
+
+.tooltip-container {
+  position: relative;
+  z-index: 24;
+  display: flex;
+}
+
+.tooltip-container:hover {
+  z-index: 25;
+}
+
+.tooltip-container span {
+  display: none;
+}
+
+span#tooltip {
+  /*the span will display just on :hover state*/
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+  border: 1px solid #6e7044;
+  background-color: #feffe1;
+  color: #6e7044;
+  text-align: center;
 }
 
 /*
