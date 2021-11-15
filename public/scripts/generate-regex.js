@@ -12,7 +12,7 @@ const listDiv = document.getElementById('strings-list')
 let input = ''
 let strings = []
 let regex = ''
-
+console.log(localStorage.getItem('regex'))
 const updateRegex = (strings) => {
   if (strings.length === 0) {
     regex = 'null'

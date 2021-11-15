@@ -14,7 +14,8 @@
               <label>Upper limit</label>
               <input
                 type='number'
-                name='string-input'
+                name='limit-input'
+                min='0'
                 placeholder='Max. number of generated strings'
                 required
               />
@@ -29,41 +30,20 @@
 
     <div id='card-2' class='card hide'>
       <div class='card-header'>
-        <div>Generated Strings and Regular Expressions</div>
-        <div class='download' data-tooltip='Download config file for ALL captchas?'>
+        <div>Generated Strings and Captchas</div>
+        <div class='download' data-tooltip='Download JSON file for ALL captchas?'>
           <i class='fas fa-file-download'></i>
         </div>
       </div>
       <div class='card-body'>
-        <ul class='strings'>
-          <li>
-            <span>{{text}}</span>
-            <img class='generated-captcha' src={{image}} height='60px' width='190' />
-            <span class='download' data-tooltip='Download config file for ALL captchas?'>
+        <ul class='captchas'>
+          {{!-- <li>
+            <span class="text">{{text}}</span>
+            <img class='generated-captcha' src={{image}} height='90px' width='260px' />
+            <span class='download' onclick="getDataOne()" data-tooltip='Download JSON file for ALL captchas?'>
               <i class='fas fa-file-download'></i>
             </span>
-          </li>
-          <li>
-            <span>{{text}}</span>
-            <img class='generated-captcha' src={{image}} height='60px' width='190' />
-            <span class='download' data-tooltip='Download config file for ALL captchas?'>
-              <i class='fas fa-file-download'></i>
-            </span>
-          </li>
-          <li>
-            <span>{{text}}</span>
-            <img class='generated-captcha' src={{image}} height='60px' width='190' />
-            <span class='download' data-tooltip='Download config file for ALL captchas?'>
-              <i class='fas fa-file-download'></i>
-            </span>
-          </li>
-          <li>
-            <span>{{text}}</span>
-            <img class='generated-captcha' src={{image}} height='60px' width='190' />
-            <span class='download' data-tooltip='Download config file for ALL captchas?'>
-              <i class='fas fa-file-download'></i>
-            </span>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>

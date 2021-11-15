@@ -37,7 +37,7 @@
         {{/if}}
 
         {{#if isCaptchaPage}}
-            {{>generate_captcha regex=regex text=captchaText image=captchaImage }}
+            {{>generate_captcha}}
             <script src='/scripts/generate-captcha.js'></script>
         {{/if}}
     </div>

@@ -1,9 +1,130 @@
 const regexInput = document.querySelector('input[name=regex-input]')
+const limitInput = document.querySelector('input[name=limit-input]')
+const generateBtn = document.querySelector('button.generate-btn')
+const list = document.querySelector('ul.captchas')
+const downloadAll = document.querySelector('div.download')
+let downloadOne
 
 const regex = localStorage.getItem('regex')
 if (regex) {
   regexInput.value = regex
 }
+
+const createNewItem = (image, text) => {
+  let li = document.createElement('li')
+  let textSpan = document.createElement('span')
+  let iconSpan = document.createElement('span')
+  let img = document.createElement('img')
+  let i = document.createElement('i')
+
+  textSpan.classList.add('text')
+  textSpan.innerText = text
+
+  img.classList.add('generated-captcha')
+  img.setAttribute('src', image)
+  img.setAttribute('width', '260px')
+  img.setAttribute('height', '90px')
+
+  iconSpan.classList.add('download')
+  iconSpan.setAttribute('onclick', 'getDataOne(event)')
+  iconSpan.setAttribute('data-tooltip', 'Download JSON file for THIS captcha?')
+
+  i.classList.add('fas', 'fa-file-download')
+
+  li.appendChild(textSpan)
+  li.appendChild(img)
+  iconSpan.appendChild(i)
+  li.appendChild(iconSpan)
+
+  return li
+}
+
+const generate = (event) => {
+  event.preventDefault()
+
+  if (!regex) {
+    window.alert('Please enter Regex to continue!')
+    return
+  }
+
+  if (!limitInput.value) {
+    window.alert('Please enter Limit to continue!')
+    return
+  }
+
+  fetch(`/captcha?regex=${regex}&limit=${+limitInput.value}`)
+    .then((data) => data.json())
+    .then((data) => {
+      localStorage.setItem('captchaData', JSON.stringify(data))
+      const htmlList = []
+      if (list.children.length > 0) {
+        list.innerHTML = ''
+      }
+
+      data.map(({ image, text }) => {
+        let newItem = createNewItem(image, text)
+        htmlList.push(newItem)
+        list.appendChild(newItem)
+      })
+    })
+    .catch((error) => {
+      console.error('Error::', error)
+    })
+}
+
+const downloadJSON = (data, { all }) => {
+  // //Convert obj to JSON string.
+  let json = JSON.stringify(data)
+
+  // //Convert JSON string to BLOB.
+  json = [json]
+  var blob1 = new Blob(json, { type: 'application/json' })
+
+  // generate filename
+  const filename = all ? 'captchas_all.json' : `captcha_${data.text}.json`
+  // //Check the Browser.
+  var isIE = false || !!document.documentMode
+  if (isIE) {
+    window.navigator.msSaveBlob(blob1, filename)
+  } else {
+    var url = window.URL || window.webkitURL
+    link = url.createObjectURL(blob1)
+    var a = document.createElement('a')
+    a.download = filename
+    a.href = link
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+}
+
+const getDataOne = (event) => {
+  const target = event.target
+  let li
+  if (target.hasAttribute('class')) {
+    li = target.parentElement.parentElement
+  } else {
+    li = target.parentElement.parentElement.parentElement
+  }
+
+  const text = li.children[0].innerText
+  const imgURL = li.children[1].getAttribute('src')
+
+  const data = { text: text, image: imgURL }
+  downloadJSON(data, { all: false })
+}
+
+generateBtn.addEventListener('click', (event) => generate(event))
+
+downloadAll.addEventListener('click', () => {
+  const captchaData = JSON.parse(localStorage.getItem('captchaData'))
+  const captchaDataObj = {}
+  captchaData.map((data, idx) => {
+    captchaDataObj[`captcha-${idx + 1}`] = { ...data }
+  })
+
+  downloadJSON(captchaDataObj, { all: true })
+})
 
 // const generateStrings =
 // const alertDialog = document.getElementById('alert')

@@ -30,7 +30,7 @@
 
 .card-body {
   /* border: 1px solid black; */
-  padding: 24px;
+  padding: 20px 24px;
 }
 
 #card-1 {
@@ -135,8 +135,8 @@
   position: relative;
 }
 
-ul.strings {
-  padding: 20px;
+ul.captchas {
+  padding: 10px 20px;
   margin: 0;
   height: 100%;
   max-height: 100%;
@@ -144,11 +144,11 @@ ul.strings {
   position: relative;
 }
 
-ul.strings li {
+ul.captchas li {
   list-style: none;
   border: 1px solid rgb(197, 192, 192);
   width: 100%;
-  padding: 8px 10px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -157,16 +157,24 @@ ul.strings li {
   position: relative;
 }
 
-ul.strings li:first-child {
+ul.captchas li:first-child {
   border-radius: 4px 4px 0 0;
 }
 
-ul.strings li:last-child {
+ul.captchas li:last-child {
   border-radius: 0 0 4px 4px;
 }
 
-ul.strings li:only-child {
+ul.captchas li:only-child {
   border-radius: 4px;
+}
+
+.text {
+  color: rgb(247, 171, 31);
+  font-weight: bold;
+  font-size: 1.4rem;
+  width: 140px;
+  max-width: 140px;
 }
 
 .download {

@@ -1,51 +1,60 @@
-/* captcha.js */
+const { createCanvas, Image, registerFont } = require('canvas')
+registerFont('src/assets/Jo_wrote_a_lovesong.ttf', { family: 'cursive' })
 
-// We'll need this later
-const { createCanvas } = require('canvas')
+// const alternateCapitals = (str) => [...str].map((char) => char.toUpperCase()).join('')
 
-// https://gist.github.com/wesbos/1bb53baf84f6f58080548867290ac2b5
-const alternateCapitals = (str) =>
-  [...str].map((char, i) => char[`to${i % 2 ? 'Upper' : 'Lower'}Case`]()).join('')
+// [...str].map((char, i) => char[`to${i % 2 ? 'Upper' : 'Lower'}Case`]()).join('')
 
-// Get a random string of alphanumeric characters
-const randomText = () => alternateCapitals(Math.random().toString(36).substring(2, 8))
+// const randomizeText = (text) => alternateCapitals(text)
 
-const FONTBASE = 200
-const FONTSIZE = 35
+const FONTBASE = 190
+const FONTSIZE = 50
 
-// Get a font size relative to base size and canvas width
 const relativeFont = (width) => {
   const ratio = FONTSIZE / FONTBASE
   const size = width * ratio
-  return `${size}px serif`
+  return `${size}px cursive`
 }
 
-// Get a float between min and max
 const arbitraryRandom = (min, max) => Math.random() * (max - min) + min
 
-// Get a rotation between -degrees and degrees converted to radians
-const randomRotation = (degrees = 15) => (arbitraryRandom(-degrees, degrees) * Math.PI) / 180
+const randomRotation = (degrees = -10) => (arbitraryRandom(-degrees, degrees) * Math.PI) / 180
 
-// Configure captcha text
-const configureText = (ctx, width, height) => {
+const configureText = (ctx, text, width, height) => {
   ctx.font = relativeFont(width)
   ctx.textBaseline = 'middle'
   ctx.textAlign = 'center'
-  const text = randomText()
+  ctx.fillStyle = 'rgba(179, 114, 240, 0.63)'
+  // ctx.textSpa
+  // text = randomizeText(text)
+  text = text.toLowerCase()
   ctx.fillText(text, width / 2, height / 2)
-  return text
 }
 
-// Get a PNG dataURL of a captcha image
-const generate = (width, height) => {
-  const canvas = createCanvas(width, height)
-  const ctx = canvas.getContext('2d')
-  ctx.rotate(randomRotation())
-  const text = configureText(ctx, width, height)
-  return {
-    image: canvas.toDataURL(),
-    text: text,
+const setBGImg = (ctx, width, height) => {
+  const bgImg = new Image()
+  bgImg.onload = () => ctx.drawImage(bgImg, 0, 0, width, height)
+  bgImg.onerror = (err) => {
+    throw err
   }
+  bgImg.src = 'src/assets/captcha-bg.png'
+}
+
+const generate = (strings, limit, width, height) => {
+  const captchas = []
+
+  for (let i = 0; i < limit; i++) {
+    const canvas = createCanvas(width, height)
+    const ctx = canvas.getContext('2d')
+
+    setBGImg(ctx, width, height)
+
+    ctx.rotate(randomRotation())
+    configureText(ctx, strings[i], width, height)
+    captchas.push(canvas.toDataURL())
+  }
+
+  return [...captchas]
 }
 
 module.exports = generate
