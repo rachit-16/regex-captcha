@@ -25,13 +25,14 @@ const createNewItem = (text, image) => {
   img.setAttribute('width', '260px')
   img.setAttribute('height', '90px')
 
-  // iconSpan.classList.add('download')
-  iconSpan.setAttribute('id', 'tooltip-container')
+  iconSpan.classList.add('download')
+  // iconSpan.setAttribute('id', 'tooltip-container')
   iconSpan.setAttribute('onclick', 'getDataOne(event)')
-  iconSpan.setAttribute('onmouseenter', 'showTooltip(event)')
-  // iconSpan.setAttribute('data-tooltip', 'Download JSON file for THIS captcha?')
+  // iconSpan.setAttribute('onmouseenter', 'showTooltip(event)')
+  iconSpan.setAttribute('data-tooltip', 'Download JSON file for THIS captcha?')
 
   i.classList.add('fas', 'fa-file-download')
+  // i.setAttribute('onmouseenter', 'showTooltip(event)')
 
   li.appendChild(textSpan)
   li.appendChild(img)
@@ -145,20 +146,20 @@ const getDataOne = (event) => {
   downloadJSON(data, { all: false })
 }
 
-const showTooltip = (event) => {
-  const target = event.target
-  console.log(target.style)
-  const tooltipSpan = document.createElement('span')
-  const tooltipText = document.createTextNode('Download JSON file for THIS captcha?')
-  tooltipSpan.setAttribute('id', 'tooltip')
-  tooltipSpan.appendChild(tooltipText)
-  target.appendChild(tooltipSpan)
-}
+// const showTooltip = (event) => {
+//   const target = event.target
+//   console.log(target.style)
+//   const tooltipSpan = document.createElement('span')
+//   const tooltipText = document.createTextNode('Download JSON file for THIS captcha?')
+//   tooltipSpan.setAttribute('id', 'tooltip')
+//   tooltipSpan.appendChild(tooltipText)
+//   target.parentElement.appendChild(tooltipSpan)
+// }
 
-const hideTooltip = () => {
-  const tooltipSpan = document.querySelector('span#tooltip')
-  tooltipSpan.remove()
-}
+// const hideTooltip = () => {
+//   const tooltipSpan = document.querySelector('span#tooltip')
+//   tooltipSpan.remove()
+// }
 
 const resetAll = () => {
   regexInput.value = ''

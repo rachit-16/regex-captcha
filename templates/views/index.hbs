@@ -32,7 +32,14 @@
             </div>
             <div class='password'>
               <i class='fas fa-key'></i>
-              <input type='password' name='password' placeholder='Password' required />
+              <span class='password-input'>
+                <input type='password' name='signup-password' placeholder='Password' required />
+                <span
+                  id='signup-toggle'
+                  class='toggle-password'
+                  onclick='togglePassword(event)'
+                >👁</span>
+              </span>
             </div>
             <button type='submit' id='signup_btn'>Sign Up</button>
           </form>
@@ -52,7 +59,14 @@
             </div>
             <div class='password'>
               <i class='fas fa-key'></i>
-              <input type='password' name='password' placeholder='Password' required />
+              <span class='password-input'>
+                <input type='password' name='login-password' placeholder='Password' required />
+                <span
+                  id='login-toggle'
+                  class='toggle-password'
+                  onclick='togglePassword(event)'
+                >👁</span>
+              </span>
             </div>
             <a href='#'>Forgot your password?</a>
             <button id='login_btn'>Sign In</button>
