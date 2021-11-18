@@ -65,7 +65,7 @@ app.get('/generate-captcha', (req, res) => {
 
 app.get('/captcha/:width?/:height?/', (req, res) => {
   const width = parseInt(req.params.width) || 400
-  const height = parseInt(req.params.height) || 190
+  const height = parseInt(req.params.height) || 200
   let { regex, limit } = req.query
 
   const strings = getStrings(regex, +limit, Math.min(10 * limit, 2000))

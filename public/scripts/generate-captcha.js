@@ -22,8 +22,8 @@ const createNewItem = (text, image) => {
 
   img.classList.add('generated-captcha')
   img.setAttribute('src', image)
-  img.setAttribute('width', '260px')
-  img.setAttribute('height', '90px')
+  img.setAttribute('width', '280px')
+  img.setAttribute('height', '120px')
 
   iconSpan.classList.add('download')
   // iconSpan.setAttribute('id', 'tooltip-container')

@@ -1,5 +1,5 @@
 const { createCanvas, Image, registerFont } = require('canvas')
-registerFont('src/assets/Jo_wrote_a_lovesong.ttf', { family: 'cursive' })
+registerFont('src/assets/ComforterBrush-Regular.ttf', { family: 'cursive' })
 
 // const alternateCapitals = (str) => [...str].map((char) => char.toUpperCase()).join('')
 
@@ -7,8 +7,8 @@ registerFont('src/assets/Jo_wrote_a_lovesong.ttf', { family: 'cursive' })
 
 // const randomizeText = (text) => alternateCapitals(text)
 
-const FONTBASE = 190
-const FONTSIZE = 50
+const FONTBASE = 160
+const FONTSIZE = 40
 
 const relativeFont = (width) => {
   const ratio = FONTSIZE / FONTBASE
@@ -18,7 +18,7 @@ const relativeFont = (width) => {
 
 const arbitraryRandom = (min, max) => Math.random() * (max - min) + min
 
-const randomRotation = (degrees = -10) => (arbitraryRandom(-degrees, degrees) * Math.PI) / 180
+const randomRotation = (degrees = -5) => (arbitraryRandom(-degrees, degrees) * Math.PI) / 180
 
 const configureText = (ctx, text, width, height) => {
   ctx.font = relativeFont(width)
