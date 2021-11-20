@@ -1,5 +1,5 @@
 const { createCanvas, Image, registerFont } = require('canvas')
-registerFont('src/assets/ComforterBrush-Regular.ttf', { family: 'cursive' })
+registerFont('src/assets/Comforter-Regular.ttf', { family: 'cursive' })
 
 // const alternateCapitals = (str) => [...str].map((char) => char.toUpperCase()).join('')
 
@@ -27,7 +27,7 @@ const configureText = (ctx, text, width, height) => {
   ctx.fillStyle = 'rgba(179, 114, 240, 0.63)'
   // ctx.textSpa
   // text = randomizeText(text)
-  text = text.toLowerCase()
+  // text = text.toLowerCase()
   ctx.fillText(text, width / 2, height / 2)
 }
 

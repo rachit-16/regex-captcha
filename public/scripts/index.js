@@ -27,19 +27,16 @@ const validateCredentials = (email, password) => {
     return false
   }
 
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  //email regex
+
+  const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
   if (!emailRegex.test(email)) {
     alert('Please enter a valid email address!')
     return false
   }
 
-  /*
-  /^[A-Za-z]\w{7,15}$/,
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
-  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/,
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/
-  */
 
+//password regex
   let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,20}$/
   if (!passwordRegex.test(password)) {
     alert(
@@ -115,20 +112,6 @@ loginButton.addEventListener('click', (event) => {
 
   loginUser(userData)
 
-  //   axios
-  //     .post('/login', userData)
-  //     .then((response) => {
-  //       console.log('login response:::', response.data)
-
-  //       if (response.data.message !== 'Login succesful') {
-  //         return alert('Unable to login. Please try again')
-  //       }
-
-  //       //   window.location = '/posts'
-  //     })
-  //     .catch((error) => {
-  //       console.log('login error:::', error)
-  //     })
 })
 
 signupButton.addEventListener('click', (event) => {
@@ -153,3 +136,10 @@ signupButton.addEventListener('click', (event) => {
 
   loginUser(userData)
 })
+
+
+  /*
+  /^[A-Za-z]\w{7,15}$/,
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
+  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$/,
+  */
